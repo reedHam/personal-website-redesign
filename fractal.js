@@ -1,6 +1,5 @@
 const gpu = new GPU(); //   Initialize library
 
-
 const resWidth = 900;
 const resHeight = resWidth;
 var maxIterations = 30;
@@ -19,124 +18,68 @@ gpu.addFunction(function computePower(num, exponent) {
 });
 
 //  create the kernel 
-const render = gpu.createKernel(function(minReal, minImaginary, realFactor, imaginaryFactor, power, juliaSet, xMouse, yMouse) {
+const render = gpu.createKernel(function(minReal, minImaginary, realFactor, imaginaryFactor, power, juliaSet, xMouse, yMouse, redInVal, greenInVal, blueInVal, redOutVal, blueOutVal, greenOutVal) {
     let cReal = minReal + this.thread.x * realFactor;
-    let cImaginary = minImaginary + this.thread.y * imaginaryFactor;
-
-    
+    let cImag = minImaginary + this.thread.y * imaginaryFactor;
 
     let zReal = cReal;
-    let zImaginary = cImaginary;
+    let zImag = cImag;
     
     if (juliaSet == 1){
         cReal = minReal + xMouse * realFactor;
-        cImaginary = minImaginary + yMouse * imaginaryFactor;
+        cImag = minImaginary + yMouse * imaginaryFactor;
     }
     
     let zTemp = 0;
     let inSet = 1;
-    var heat = 0;
     let distance = 0;
-    let zROld = zReal;
-    let zIOld = zImaginary;
-    for(var i = 0; i <= maxIte; i++){
-        let zReal2 = zReal * zReal;
-        let zImaginary2 = zImaginary * zImaginary;
-        let tempReal = zReal;
-        let tempImaginary = zImaginary;
-        //(zReal*zReal + zImaginary*zImaginary) this is the absolute value^2 of the complex number z if this number is > 4 then it trends to infinity
-        if ((zReal2 + zImaginary2) > 4){ // f(z) is trending towards infinity and as such it is not part of the Mandelbrot set
+    let zRealOld = zReal;
+    let zImagOld = zImag;
+
+    for (let i = 0; i < maxIte; i++){
+        let zRealSquare = zReal * zReal;
+        let zImagSquare = zImag * zImag;
+
+        // check if trending to infinity
+        if ((zRealSquare + zImagSquare) > 4){
             inSet = 0;
             break;
         }
-        
-        // calculate z^2 + c
-        zTemp = computePower((zReal2 + zImaginary2), power/2) * Math.cos(power * Math.atan(zImaginary, zReal)) + cReal;
-        zImaginary = computePower((zReal2 + zImaginary2), power/2) * Math.sin(power * Math.atan(zImaginary, zReal)) + cImaginary;
+
+        // Pre computation
+        let compPow = computePower((zRealSquare + zImagSquare), power/2);
+        let compAtan = power * Math.atan(zImag, zReal);
+
+        let zTemp = compPow * Math.cos(compAtan) + cReal;
+        zImag = compPow * Math.sin(compAtan) + cImag;
         zReal = zTemp;
 
-        // basic formula
-        // zImaginary = 2 * zReal * zImaginary + cImaginary;
-        // zReal = zReal2 - zImaginary2 + cReal;
-        distance += Math.sqrt(computePower((zROld - zReal), 2) + computePower(zIOld- zImaginary, 2));
-        zROld = zReal;
-        zIOld = zImaginary;
-        heat = i;
+        distance += Math.sqrt(computePower((zRealOld - zReal), 2) + computePower((zImagOld - zImag), 2));
+        zRealOld = zReal;
+        zImagOld = zImag;
     }
-    heat = heat / maxIte;
-    
-
     
     var red = 0;
     var green = 0;
     var blue = 0;
-    if (inSet != 1){
-        red = heat;
-        green = heat / 2;
-        blue = (1 - heat) / 2;
+    var disVal = distance / 4;
+
+    if (inSet == 1){
+        //disVal = Math.floor(disVal);
+        red = disVal / redInVal;
+        blue = disVal / blueInVal;
+        green = disVal / greenInVal;
+        
     } else {
-        if (distance < 1){
-            red = 0.25;
-            green = 0.25;
-            blue = 0.25; 
-        } else if (distance < 2){
-            red = 0.5;
-            green = 0.5;
-            blue = 0.5; 
-        } else if (distance < 3){
-            red = 0.75;
-            green = 0.75;
-            blue = 0.75; 
-        } else if (distance < 3.5) {
-            red = 0.85;
-            green = 0.85;
-            blue = 0.85; 
-        } else if (distance < 3.75) {
-            red = 0.95;
-            green = 0.95;
-            blue = 0.95; 
-        } else {
-            red = 1;
-            green = 1;
-            blue = 1; 
-        }
+        red = disVal /  redOutVal;
+        blue = disVal / blueOutVal;
+        green = disVal / greenOutVal;
     }
-    /*if (inSet != 1){
-        var disVal = distance / 4;
-        red = disVal / 2;
-        green = disVal / 8;
-        blue = (1 - disVal) / 2;
-    } else {
-        if (distance < 1){
-            red = 0.25;
-            green = 0.25;
-            blue = 0.25; 
-        } else if (distance < 2){
-            red = 0.5;
-            green = 0.5;
-            blue = 0.5; 
-        } else if (distance < 3){
-            red = 0.75;
-            green = 0.75;
-            blue = 0.75; 
-        } else if (distance < 3.5) {
-            red = 0.85;
-            green = 0.85;
-            blue = 0.85; 
-        } else if (distance < 3.75) {
-            red = 0.95;
-            green = 0.95;
-            blue = 0.95; 
-        } else {
-            red = 1;
-            green = 1;
-            blue = 1; 
-        }
-    }*/
-    this.color(red, green, blue);
+
+    this.color(red, blue, green);
 }, {
     constants:{
-        maxIte: maxIterations
+        maxIte: 1000
     }
 })
   .setOutput([resWidth, resHeight])
@@ -149,10 +92,18 @@ function getInput(){
     var input = {};
     input.xCord =  parseFloat(document.getElementById("xCord").value);
     input.yCord =  parseFloat(document.getElementById("yCord").value);
-    input.zoomSpeed = 1 + (document.getElementById("zoomSlider").value / 100);
+    input.zoom = 1 + (document.getElementById("zoomSlider").value / 100);
     input.size = parseFloat(document.getElementById("zoomBox").value);
     input.trackMouse = document.getElementById("mouseTrack").checked ? 1 : 0;
     input.power =  parseFloat(document.getElementById("power").value);
+
+    input.redIn = parseFloat(document.getElementById("redSliderIn").value);
+    input.blueIn = parseFloat(document.getElementById("greenSliderIn").value);
+    input.greenIn = parseFloat(document.getElementById("blueSliderIn").value);
+
+    input.redOut = parseFloat(document.getElementById("redSliderOut").value);
+    input.blueOut = parseFloat(document.getElementById("greenSliderOut").value);
+    input.greenOut = parseFloat(document.getElementById("blueSliderOut").value);
     return input;
 }
 
@@ -161,11 +112,17 @@ let oldInput;
 function display(){
     input = getInput();
     if (JSON.stringify(oldInput) !== JSON.stringify(input) || input.trackMouse){
-        size = input.size / input.zoomSpeed;
+        size = input.size / input.zoom;
         box = bindBox(input.xCord, input.yCord, size);
         realFactor = (box.maxReal - box.minReal) / (resHeight - 1);
         imaginaryFactor = (box.maxImaginary - box.minImaginary) / (resWidth - 1);
-        render(box.minReal, box.minImaginary, realFactor, imaginaryFactor, input.power, input.trackMouse, mousePos.x, mousePos.y);
+
+        render(box.minReal, box.minImaginary, realFactor, imaginaryFactor, input.power, input.trackMouse, mousePos.x, mousePos.y, 
+            input.redIn, input.blueIn, input.greenIn,
+            input.redOut, input.blueOut, input.greenOut);
+
+
+            
         var canvas = render.getCanvas();
         canvas.addEventListener('mousemove', function(evt) {
             mousePos = getMousePos(canvas, evt);

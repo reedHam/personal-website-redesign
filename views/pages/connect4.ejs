@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/head %>
+        <script type="text/javascript" src="scripts/jslib/phaser.js"></script>
+        <script type="text/javascript" src="scripts/connect4/gameUtil.js"></script>
+        <script type="text/javascript" src="scripts/connect4/game.js"></script>
+        <script type="text/javascript" src="scripts/connect4/board.js"></script>
+        <script type="text/javascript" src="scripts/connect4/UI/tile.js"></script>
+        <script type="text/javascript" src="scripts/connect4/AI/gameState.js"></script>
+        <script type="text/javascript" src="scripts/connect4/AI/miniMaxAI.js"></script>
+        <script type="text/javascript" src="scripts/connect4/UI/ui.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/connect4Style.css">
+    </head>
+    <body>
+        <nav>
+            <% include ../partials/nav %>
+        </nav>
+
+        <main> 
+            <h1>Connect 4</h1>
+            <div id="gameDiv"></div>
+            <div id="aboutDiv">
+                <h2>About</h2>
+                <p> This game is a recreation of the classic Connect 4 board game. I created this game to learn about the mini-max algorithm. 
+                    Both yellow and red players have an Ai powered by the mini-max algorithm and by changing the level you effectively increase the amount of moves that the Ai will look into the future.</p>
+                <p>See this <a href="https://en.wikipedia.org/wiki/Minimax" target="_blank">wikipedia article</a> for more information on minimax.</p> 
+                <p>Click <a href="https://github.com/reedHam/Connect-4" target="_blank">here</a> to see the source code for an earlier version of the game.</p>
+            </div>
+        </main>
+
+        <footer>
+            <%include ../partials/footer %>
+        </footer>
+
+    </body>
+</html>

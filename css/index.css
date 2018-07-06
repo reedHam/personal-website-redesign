@@ -1,0 +1,106 @@
+header {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/panorama.webp");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    border-bottom:  6px solid white;
+    display: flex;
+    align-items: center;
+}
+
+h1{
+    text-align:center;
+}
+
+@media (min-width: 800px){
+    header div {
+        margin-left: 15%;
+        font-size: 2.5em !important;
+    }
+} 
+
+header div {
+    padding: 10px;
+    border: 6px solid white;
+    background-color: black;
+    box-shadow: 3px 3px 10px 3px black;
+
+    color: white;
+    font-size: 1.5em;
+}
+
+header div h1 {
+    margin: 0px;
+}
+
+
+.about {
+    background-color: rgb(97, 97, 97);
+    border: 2px solid white;
+    margin-top: 20px; 
+    padding: 15px;
+    box-shadow: 3px 3px 10px 3px black;
+}
+
+.about p{
+    margin-left: 1em;
+}
+
+.skills {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid white;
+    background-color: rgb(97, 97, 97);
+    box-shadow: 3px 3px 10px 3px black;
+}
+
+.projects {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid white;
+    background-color: rgb(97, 97, 97);
+    box-shadow: 3px 3px 10px 3px black;
+}
+
+.projects h1 {
+    margin: 0px;
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+}
+.project h2 {
+    text-align: center;
+}
+
+.project p {
+    margin-left: 2em;
+}
+
+.project img {
+    display:block;
+    margin:auto;
+}
+
+
+.schooling {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid white;
+    background-color: rgb(97, 97, 97);
+    box-shadow: 3px 3px 10px 3px black;
+}
+
+.contactMe {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid white;
+    background-color: rgb(97, 97, 97);
+    box-shadow: 3px 3px 10px 3px black;
+}

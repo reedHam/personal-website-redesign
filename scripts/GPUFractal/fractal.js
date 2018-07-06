@@ -1,6 +1,6 @@
 const gpu = new GPU(); //   Initialize library
 
-// native pow function was available in gpu.js
+// native pow function was not available in gpu.js
 gpu.addFunction(function computePower(num, exponent) {
     var expCounter = Math.abs(exponent);
     var result = 1;
@@ -13,67 +13,6 @@ gpu.addFunction(function computePower(num, exponent) {
     return result;
 });
 
-function reload(){
-    Cookies.set("params", getInput());
-    location.reload();
-}
-
-function reloadToApply(){
-    document.getElementById("reloadLbl").style.visibility = "visible";
-}
-
-
-function resetToDefault(){
-    document.getElementById("resolution").value = 720;
-    document.getElementById("maxIterations").value = 30;
-
-    document.getElementById("xCord").value = 0;
-    document.getElementById("yCord").value = 0;
-
-    document.getElementById("sizeText").value = 4;
-    document.getElementById("zoomSlider").value = 0;
-    
-    document.getElementById("mouseTrack").checked = false;
-    document.getElementById("power").value = 2;
-
-    document.getElementById("redSliderIn").value = 20;
-    document.getElementById("greenSliderIn").value = 20;
-    document.getElementById("blueSliderIn").value = 20;
-
-    document.getElementById("redSliderOut").value = 20;
-    document.getElementById("greenSliderOut").value = 20;
-    document.getElementById("blueSliderOut").value = 20;
-    reload();
-}
-
-
-function getInput(){
-    return {
-        resolution: parseInt(document.getElementById("resolution").value),
-        maxIterations: parseInt(document.getElementById("maxIterations").value),
-
-        xCord: parseFloat(document.getElementById("xCord").value),
-        yCord: parseFloat(document.getElementById("yCord").value),
-        
-        size: parseFloat(document.getElementById("sizeText").value),
-        zoom: parseFloat(document.getElementById("zoomSlider").value),
-        trackMouse: document.getElementById("mouseTrack").checked ? 1 : 0, // conversion of boolean to 1/0 due to gpu.js restrictions 
-        power: parseInt(document.getElementById("power").value),
-
-        redIn: parseFloat(document.getElementById("redSliderIn").value),
-        blueIn: parseFloat(document.getElementById("blueSliderIn").value),
-        greenIn: parseFloat(document.getElementById("greenSliderIn").value),
-
-        redOut: parseFloat(document.getElementById("redSliderOut").value),
-        blueOut: parseFloat(document.getElementById("blueSliderOut").value),
-        greenOut: parseFloat(document.getElementById("greenSliderOut").value),
-
-        smoothingIn: document.getElementById("smoothingInToggle").checked ? 1 : 0,
-        smoothingOut: document.getElementById("smoothingOutToggle").checked ? 1 : 0
-    };
-}
-
-
 // this function draws a new image when the input has changed 
 let oldInput;
 let mouseCordFreeze = false;
@@ -81,8 +20,11 @@ function display(){
     input = getInput();
     if (JSON.stringify(oldInput) !== JSON.stringify(input) || input.trackMouse){
         Cookies.set("params", input);
+
         size = input.zoom != 0 ? input.size / input.zoom : input.size;
         box = bindBox(input.xCord, input.yCord, size);
+
+        // create complex number factors 
         realFactor = (box.maxReal - box.minReal) / (resHeight - 1);
         imaginaryFactor = (box.maxImaginary - box.minImaginary) / (resWidth - 1);
 
@@ -91,6 +33,7 @@ function display(){
             input.redOut, input.blueOut, input.greenOut, 
             input.smoothingIn, input.smoothingOut);
 
+        let canvas = render.getCanvas();
         canvas.addEventListener('mousemove', function(evt) {
             mousePos = getMousePos(canvas, evt);
         });
@@ -100,23 +43,6 @@ function display(){
 
     oldInput = input;
     requestAnimationFrame(display);
-}
-
-function bindBox(x, y, width, height = width){
-    return {
-        minReal: x - (width/2),
-        maxReal: x + (width/2),
-        minImaginary: y - (height/2),
-        maxImaginary: y + (height/2)
-    };
-}
-
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-      x: evt.clientX - rect.left,
-      y: evt.clientY - rect.top
-    };
 }
 
 var render;
@@ -237,3 +163,82 @@ function load(){
     
     requestAnimationFrame(display);
 }
+
+// creates the binding box to render relative to the complex plane
+function bindBox(x, y, width, height = width){
+    return {
+        minReal: x - (width/2),
+        maxReal: x + (width/2),
+        minImaginary: y - (height/2),
+        maxImaginary: y + (height/2)
+    };
+}
+
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
+}
+
+function reload(){
+    Cookies.set("params", getInput());
+    location.reload();
+}
+
+// displays the reload to apply label
+function reloadToApply(){
+    document.getElementById("reloadLbl").style.visibility = "visible";
+}
+
+function resetToDefault(){
+    document.getElementById("resolution").value = 480;
+    document.getElementById("maxIterations").value = 30;
+
+    document.getElementById("xCord").value = 0;
+    document.getElementById("yCord").value = 0;
+
+    document.getElementById("sizeText").value = 4;
+    document.getElementById("zoomSlider").value = 0;
+    
+    document.getElementById("mouseTrack").checked = false;
+    document.getElementById("power").value = 2;
+
+    document.getElementById("redSliderIn").value = 20;
+    document.getElementById("greenSliderIn").value = 20;
+    document.getElementById("blueSliderIn").value = 20;
+
+    document.getElementById("redSliderOut").value = 20;
+    document.getElementById("greenSliderOut").value = 20;
+    document.getElementById("blueSliderOut").value = 20;
+    reload();
+}
+
+
+function getInput(){
+    return {
+        resolution: parseInt(document.getElementById("resolution").value),
+        maxIterations: parseInt(document.getElementById("maxIterations").value),
+
+        xCord: parseFloat(document.getElementById("xCord").value),
+        yCord: parseFloat(document.getElementById("yCord").value),
+        
+        size: parseFloat(document.getElementById("sizeText").value),
+        zoom: parseFloat(document.getElementById("zoomSlider").value),
+        trackMouse: document.getElementById("mouseTrack").checked ? 1 : 0, // conversion of boolean to 1/0 due to gpu.js restrictions 
+        power: parseInt(document.getElementById("power").value),
+
+        redIn: parseFloat(document.getElementById("redSliderIn").value),
+        blueIn: parseFloat(document.getElementById("blueSliderIn").value),
+        greenIn: parseFloat(document.getElementById("greenSliderIn").value),
+
+        redOut: parseFloat(document.getElementById("redSliderOut").value),
+        blueOut: parseFloat(document.getElementById("blueSliderOut").value),
+        greenOut: parseFloat(document.getElementById("greenSliderOut").value),
+
+        smoothingIn: document.getElementById("smoothingInToggle").checked ? 1 : 0,
+        smoothingOut: document.getElementById("smoothingOutToggle").checked ? 1 : 0
+    };
+}
+

@@ -105,9 +105,13 @@ header div h1 {
 }
 
 .schools {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 1em;
+    column-count: 2;
+}
+
+@media (max-width: 800px){
+    .schools {
+        column-count: 1;
+    }
 }
 
 .contactMe {

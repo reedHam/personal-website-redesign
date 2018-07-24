@@ -53,6 +53,13 @@ header div h1 {
     margin: auto;
 }
 
+@media (max-width: 800px) {
+    .about img {
+        width: 55%;
+    }
+    
+}
+
 .about p{
     margin-left: 1em;
     text-align: center;

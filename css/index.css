@@ -47,8 +47,15 @@ header div h1 {
     box-shadow: 3px 3px 10px 3px black;
 }
 
+.about img {
+    width: 25%;
+    display: block;
+    margin: auto;
+}
+
 .about p{
     margin-left: 1em;
+    text-align: center;
 }
 
 .skills {
@@ -95,8 +102,12 @@ header div h1 {
     border: 2px solid white;
     background-color: rgb(97, 97, 97);
     box-shadow: 3px 3px 10px 3px black;
+}
+
+.schools {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1em;
 }
 
 .contactMe {

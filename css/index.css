@@ -1,3 +1,6 @@
+html {
+    min-width: 200px;
+}
 header {
     background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/panorama.webp");
     height: 100%; 
@@ -17,7 +20,7 @@ h1{
     text-align:center;
 }
 
-@media (min-width: 800px){
+@media (min-width: 900px){
     header div {
         margin-left: 15%;
         font-size: 2.5em !important;
@@ -53,7 +56,7 @@ header div h1 {
     margin: auto;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     .about img {
         width: 55%;
     }
@@ -113,12 +116,43 @@ header div h1 {
 
 .schools {
     column-count: 2;
+    text-align: center;
 }
 
-@media (max-width: 800px){
+.uleth, .lethCollege{
+    background-color: rgb(97, 97, 97);
+    height: 780px;
+    border: 2px solid white;
+    padding: 15px;
+}
+
+
+.schools img {
+    display: block;
+    margin: auto;
+    width: 330px;
+    height: 480px;
+}
+
+.schools ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+@media (max-width: 900px){
     .schools {
         column-count: 1;
     }
+
+    .uleth, .lethCollege{
+        margin-bottom: 10px;
+    }
+
+    .schools img {
+        width: 330px;
+        height: 460px;
+    }
+    
 }
 
 .contactMe {

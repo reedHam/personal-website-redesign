@@ -1,6 +1,8 @@
 html {
     min-width: 200px;
 }
+
+
 header {
     background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/panorama.webp");
     height: 100%; 
@@ -22,7 +24,6 @@ h1{
 
 @media (min-width: 900px){
     header div {
-        margin-left: 15%;
         font-size: 2.5em !important;
     }
 } 
@@ -32,7 +33,7 @@ header div {
     border: 6px solid white;
     background-color: black;
     box-shadow: 3px 3px 10px 3px black;
-
+    margin: auto;
     color: white;
     font-size: 1.5em;
 }
@@ -149,8 +150,8 @@ header div h1 {
     }
 
     .schools img {
-        width: 330px;
-        height: 460px;
+        width: 230px;
+        height: 350px;
     }
     
 }

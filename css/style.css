@@ -15,6 +15,16 @@ body, html {
     background-attachment: fixed;
 }
 
+nav {
+    overflow: hidden;
+    display: block;
+    text-align: center;
+}
+
+nav a {
+    padding: 15px;
+}
+
 
 main {
     width: 80%;
@@ -25,6 +35,7 @@ footer {
     margin-top: 15px;
     padding: 10px;
     background: darkgrey;
+    border-top: 2px solid white;
 }
 
 button {

@@ -52,22 +52,46 @@ header div h1 {
 }
 
 .about img {
-    width: 25%;
+    width: 55%;
+    height: auto;
     display: block;
     margin: auto;
 }
 
-@media (max-width: 900px) {
-    .about img {
-        width: 55%;
-    }
-    
+.aboutGrid {
+    column-count: 2;
+    display: table-cell;
+    vertical-align: middle
 }
 
 .about p{
-    margin-left: 1em;
-    text-align: center;
+    font-size: 1.2em;
+    margin-left: 5em;
+    padding-top: 10px;
+    padding-bottom: 0px; 
+    width:70%;
 }
+
+@media (max-width: 1200px) {
+    .about img {
+        width: 70%;
+        
+    }
+    .aboutGrid {
+        column-count: 1;
+        text-align: center;
+    }
+
+    .about p {
+        
+        padding-top: 20px;
+        width: 90%;
+        margin: auto;
+    }
+}
+
+
+
 
 .skills {
     margin-top: 20px;
@@ -122,7 +146,7 @@ header div h1 {
 
 .uleth, .lethCollege{
     background-color: rgb(97, 97, 97);
-    height: 780px;
+    height: 800px;
     border: 2px solid white;
     padding: 15px;
 }

@@ -13,6 +13,7 @@ body, html {
     color: white;
     background-image: url("../images/congruent_outline.png");
     background-attachment: fixed;
+    line-height: 1.5em;
 }
 
 nav {

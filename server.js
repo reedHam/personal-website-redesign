@@ -19,6 +19,6 @@ app.get('/GPUFractal', function (req, res) {
     res.render('pages/GPUFractal', {title: "GPU Fractal"});
 });
 
-server.listen(8080, function() {
+server.listen(3000, function() {
     console.log('Listening on ' + server.address().port);
 });

@@ -1,8 +1,12 @@
 main{
     background: rgb(102, 102, 102);
-    padding: 20px;
-    margin-top: 15px;
+    padding: 20px !important;
+    margin-top: 65px;
     box-shadow: 3px 3px 10px 3px black;
+}
+
+main {
+    border: 2px solid white;
 }
 
 main h1{

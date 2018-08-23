@@ -1,8 +1,9 @@
 main{
     background: rgb(102, 102, 102);
-    padding: 20px;
-    margin-top: 15px;
+    padding: 20px !important;
+    margin-top: 65px;
     box-shadow: 3px 3px 10px 3px black;
+    border: 2px solid white;
 }
 
 main h1{
@@ -36,9 +37,11 @@ input{
 }
 
 canvas {
-    padding: 25px;
+    padding: 0px;
+    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
+    border: 2px solid white;
 }
 
 .canvasDiv {

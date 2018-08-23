@@ -16,14 +16,38 @@ body, html {
     line-height: 1.5em;
 }
 
+/* navigation */
 nav {
     overflow: hidden;
-    display: block;
+    background-color: white;
     text-align: center;
+    z-index:10;
+}
+
+nav ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+nav li {
+    display: inline;
 }
 
 nav a {
     padding: 15px;
+    display: inline-block;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+}
+
+.sticky + main {
+    padding-top: 50px;
 }
 
 
@@ -39,6 +63,8 @@ footer {
     border-top: 2px solid white;
 }
 
+
+/* buttons */
 button {
     background-color: rgb(0, 9, 139);
     color:white;
@@ -59,6 +85,7 @@ button:active {
     transform: translateY(0.1em);
 }
 
+/* links */
 a {
     color: rgb(0, 14, 209);
 }

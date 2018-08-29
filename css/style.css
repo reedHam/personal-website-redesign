@@ -21,6 +21,8 @@ nav {
     overflow: hidden;
     background-color: white;
     text-align: center;
+    border-top:  6px solid white;
+    border-bottom:  6px solid rgb(35, 38, 53);
     z-index:10;
 }
 
@@ -36,7 +38,17 @@ nav li {
 
 nav a {
     padding: 15px;
+    color: inherit;
+    text-decoration: inherit;
     display: inline-block;
+    transition: all .1s ease-in-out;
+}
+
+nav a:hover {
+    background-color: rgb(35, 38, 53);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .sticky {

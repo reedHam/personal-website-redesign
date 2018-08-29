@@ -2,7 +2,6 @@ html {
     min-width: 200px;
 }
 
-
 header {
     background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/panorama.webp");
     height: 100%; 
@@ -13,7 +12,6 @@ header {
     -o-background-size: cover;
     background-size: cover;
 
-    border-bottom:  6px solid white;
     display: flex;
     align-items: center;
 }

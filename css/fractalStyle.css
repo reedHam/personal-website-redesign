@@ -49,6 +49,18 @@ canvas {
     display: inline-flex;
 }
 
+.colorContainer {
+    width: 100%;
+    display: inline-grid;
+    text-align: center;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.colourSelector {
+    margin: auto;
+}
 
 .slidecontainer {
     width: 100%; 
@@ -59,6 +71,9 @@ canvas {
     clear: both;
     display: table;
 }
+
+
+
 
 .slider {
     -webkit-appearance: none;  
@@ -73,9 +88,6 @@ canvas {
     float: right;
 }
 
-.colourSlider {
-    direction: rtl;    
-}
 
 .slider:hover {
     opacity: 1; 

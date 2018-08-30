@@ -83,8 +83,8 @@ function load(){
 
     document.getElementById("mouseTrack").checked = paramsCookie.trackMouse == 1 ? true : false;
     document.getElementById("power").value = paramsCookie.power;
-
-    const inColourSelector = colorjoe.rgb("innerColorSelector", "rgb(" + Math.floor(paramsCookie.redIn * 256) + ", " + Math.floor(paramsCookie.greenOut * 256) + ", " + Math.floor(paramsCookie.blueOut * 256) +")");
+    
+    const inColourSelector = colorjoe.rgb("innerColorSelector", "rgb(" + Math.floor(paramsCookie.redIn * 100) + "%, " + Math.floor(paramsCookie.greenIn * 100) + "%, " + Math.floor(paramsCookie.blueIn * 100) +"%)");
     inColourSelector.on("change", color => {
         colorIn.red = color.red();
         colorIn.blue = color.blue();
@@ -93,7 +93,7 @@ function load(){
     colorIn = {red: paramsCookie.redIn, blue: paramsCookie.blueIn, green: paramsCookie.greenIn};
     
 
-    const outColourSelector = colorjoe.rgb("outerColorSelector", "rgb(" + Math.floor(paramsCookie.redOut * 256) + ", " + Math.floor(paramsCookie.greenOut * 256) + ", " + Math.floor(paramsCookie.blueOut * 256) +")");
+    const outColourSelector = colorjoe.rgb("outerColorSelector", "rgb(" + Math.floor(paramsCookie.redOut * 100) + "%, " + Math.floor(paramsCookie.greenOut * 100) + "%, " + Math.floor(paramsCookie.blueOut * 100) +"%)");
     outColourSelector.on("change", color => {
         colorOut.red = color.red();
         colorOut.blue = color.blue();

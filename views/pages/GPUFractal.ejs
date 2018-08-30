@@ -4,8 +4,10 @@
         <% include ../partials/head %>
         <script src="scripts/jslib/gpu.js"></script>
         <script src="scripts/jslib/js.cookie-2.2.0.js"></script>
+        <script src="scripts/jslib/colorjoe.js"></script>
         <script src="scripts/GPUFractal/fractal.js"></script>
         <link rel="stylesheet" href="css/fractalStyle.css">
+        <link rel="stylesheet" href="css/colorjoe.css">
     </head>
     <body onload="load()">
         <nav class="sticky">
@@ -44,23 +46,21 @@
                 </tr>
             </table>
              
-            <div class="slideContainer">
-                <h2>Inner colour</h1>
-                <div><span>Red</span><input id="redSliderIn" class="slider colourSlider" type="range" min="1" max="40" value="20" step="any"><div class="clearfix"></div></div>
-                <div><span>Green</span><input id="greenSliderIn" class="slider colourSlider" type="range" min="1" max="40" value="20" step="any"><div class="clearfix"></div></div>
-                <div><span>Blue</span><input id="blueSliderIn" class="slider colourSlider" type="range" min="1" max="40" value="20" step="any"><div class="clearfix"></div></div>
-                <span>Smoothing</span><input id="smoothingInToggle" type="checkbox">
-                <div class="clearfix"></div>
+            <div class="colorSelectors">
+                <div>
+                    <h2>Inner colour</h1>
+                    <div id="innerColorSelector"></div>
+                    <span>Smoothing</span><input id="smoothingInToggle" type="checkbox">
+                </div>
+    
+                <div>
+                    <h2>Outer colour</h1>
+                    <div id="outerColorSelector"></div>
+                    <span>Smoothing</span><input id="smoothingOutToggle" type="checkbox">
+                </div>
             </div>
+           
 
-            <div class="slideContainer">
-                <h2>Outer colour</h1>
-                <div><span>Red</span><input id="redSliderOut" class="slider colourSlider" type="range" min="1" max="40" value="20" step="any"><div class="clearfix"></div></div>
-                <div><span>Green</span><input id="greenSliderOut" class="slider colourSlider" type="range" min="1" max="40" value="20" step="any"><div class="clearfix"></div></div>
-                <div><span>Blue</span><input id="blueSliderOut" class="slider colourSlider" type="range" min="1" max="40" value="20" step="any"><div class="clearfix"></div></div>
-                <span>Smoothing</span><input id="smoothingOutToggle" type="checkbox">
-                <div class="clearfix"></div>
-            </div>
             <br>
             <div class="slideContainer">
                     <h2 id="zoomLbl">Zoom</h2>

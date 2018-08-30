@@ -15,9 +15,9 @@ gpu.addFunction(function computePower(num, exponent) {
 
 // this function draws a new image when the input has changed 
 let oldInput;
-let mouseCordFreeze = false;
 function display(){
     input = getInput();
+
     if (JSON.stringify(oldInput) !== JSON.stringify(input) || input.trackMouse){
         Cookies.set("params", input);
 
@@ -29,8 +29,8 @@ function display(){
         imaginaryFactor = (box.maxImaginary - box.minImaginary) / (resWidth - 1);
 
         render(box.minReal, box.minImaginary, realFactor, imaginaryFactor, input.power, input.trackMouse, mousePos.x, mousePos.y, 
-            input.redIn, input.blueIn, input.greenIn,
-            input.redOut, input.blueOut, input.greenOut, 
+            input.redIn, input.greenIn, input.blueIn,
+            input.redOut, input.greenOut, input.blueOut,  
             input.smoothingIn, input.smoothingOut);
 
         let canvas = render.getCanvas();
@@ -51,6 +51,10 @@ var resHeight = 0;
 var maxIterations = 0;
 var mousePos = {x:0, y:0};
 var size = 4;
+var colorIn; 
+var colorOut; 
+
+
 
 // this function initializes all of the user controlled settings based on a cookie
 function load(){
@@ -59,6 +63,8 @@ function load(){
     if (paramsCookie == undefined){
         resWidth = resHeight = 720;
         maxIterations =  30;
+        colorIn = {red: 0, blue: 0, green: 0};
+        colorOut = {red: 0, blue: 0, green: 0};
         Cookies.set('params', getInput(), { expires: 365 });
         paramsCookie = Cookies.getJSON('params');
     } else {
@@ -78,20 +84,29 @@ function load(){
     document.getElementById("mouseTrack").checked = paramsCookie.trackMouse == 1 ? true : false;
     document.getElementById("power").value = paramsCookie.power;
 
-    document.getElementById("redSliderIn").value = paramsCookie.redIn;
-    document.getElementById("greenSliderIn").value = paramsCookie.greenIn;
-    document.getElementById("blueSliderIn").value = paramsCookie.blueIn;
+    const inColourSelector = colorjoe.rgb("innerColorSelector", "rgb(" + Math.floor(paramsCookie.redIn * 256) + ", " + Math.floor(paramsCookie.greenOut * 256) + ", " + Math.floor(paramsCookie.blueOut * 256) +")");
+    inColourSelector.on("change", color => {
+        colorIn.red = color.red();
+        colorIn.blue = color.blue();
+        colorIn.green = color.green();});
+    
+    colorIn = {red: paramsCookie.redIn, blue: paramsCookie.blueIn, green: paramsCookie.greenIn};
+    
 
-    document.getElementById("redSliderOut").value = paramsCookie.redOut;
-    document.getElementById("greenSliderOut").value = paramsCookie.greenOut;
-    document.getElementById("blueSliderOut").value = paramsCookie.blueOut;
+    const outColourSelector = colorjoe.rgb("outerColorSelector", "rgb(" + Math.floor(paramsCookie.redOut * 256) + ", " + Math.floor(paramsCookie.greenOut * 256) + ", " + Math.floor(paramsCookie.blueOut * 256) +")");
+    outColourSelector.on("change", color => {
+        colorOut.red = color.red();
+        colorOut.blue = color.blue();
+        colorOut.green = color.green();});
+
+    colorOut = {red: paramsCookie.redOut, blue: paramsCookie.blueOut, green: paramsCookie.greenOut};
 
     document.getElementById("smoothingInToggle").checked = paramsCookie.smoothingIn == 1 ? true : false;
     document.getElementById("smoothingOutToggle").checked = paramsCookie.smoothingOut == 1 ? true : false;
 
     //  create the kernel 
     render = gpu.createKernel(function(minReal, minImaginary, realFactor, imaginaryFactor, power, juliaSet, xMouse, yMouse, 
-        redInVal, greenInVal, blueInVal, redOutVal, blueOutVal, greenOutVal, 
+        redInVal, greenInVal, blueInVal, redOutVal, greenOutVal, blueOutVal, 
         smoothingIn, smoothingOut) {
         let cReal = minReal + this.thread.x * realFactor;
         let cImag = minImaginary + this.thread.y * imaginaryFactor;
@@ -144,20 +159,20 @@ function load(){
             if (smoothingIn == 0){
                 disVal = Math.ceil(disVal);
             } 
-            red = disVal / redInVal;
-            blue = disVal / blueInVal;
-            green = disVal / greenInVal;
+            red = disVal * redInVal;
+            green = disVal * greenInVal;
+            blue = disVal * blueInVal;
             
         } else {
             if (smoothingOut == 0){
                 disVal = Math.ceil(disVal);
             }
-            red = disVal /  redOutVal;
-            blue = disVal / blueOutVal;
-            green = disVal / greenOutVal;
+            red = disVal * redOutVal;
+            green = disVal * greenOutVal;
+            blue = disVal * blueOutVal;
         }
 
-        this.color(red, blue, green);
+        this.color(red, green, blue);
     }, {constants:{ maxIte: maxIterations }}).setOutput([resWidth, resHeight]).setGraphical(true);
 
     
@@ -205,13 +220,6 @@ function resetToDefault(){
     document.getElementById("mouseTrack").checked = false;
     document.getElementById("power").value = 2;
 
-    document.getElementById("redSliderIn").value = 20;
-    document.getElementById("greenSliderIn").value = 20;
-    document.getElementById("blueSliderIn").value = 20;
-
-    document.getElementById("redSliderOut").value = 20;
-    document.getElementById("greenSliderOut").value = 20;
-    document.getElementById("blueSliderOut").value = 20;
     reload();
 }
 
@@ -229,13 +237,13 @@ function getInput(){
         trackMouse: document.getElementById("mouseTrack").checked ? 1 : 0, // conversion of boolean to 1/0 due to gpu.js restrictions 
         power: parseInt(document.getElementById("power").value),
 
-        redIn: parseFloat(document.getElementById("redSliderIn").value),
-        blueIn: parseFloat(document.getElementById("blueSliderIn").value),
-        greenIn: parseFloat(document.getElementById("greenSliderIn").value),
+        redIn: colorIn.red,
+        blueIn: colorIn.blue,
+        greenIn: colorIn.green,
 
-        redOut: parseFloat(document.getElementById("redSliderOut").value),
-        blueOut: parseFloat(document.getElementById("blueSliderOut").value),
-        greenOut: parseFloat(document.getElementById("greenSliderOut").value),
+        redOut: colorOut.red,
+        blueOut: colorOut.blue,
+        greenOut: colorOut.green,
 
         smoothingIn: document.getElementById("smoothingInToggle").checked ? 1 : 0,
         smoothingOut: document.getElementById("smoothingOutToggle").checked ? 1 : 0

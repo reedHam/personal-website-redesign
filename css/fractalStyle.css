@@ -73,8 +73,6 @@ canvas {
 }
 
 
-
-
 .slider {
     -webkit-appearance: none;  
     appearance: none;
@@ -119,13 +117,26 @@ input[type=number]::-webkit-inner-spin-button {
     padding-right: 50px; 
 }
 
+.buttonContainer{
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+
 #resetBtn {
     width:10%;
-    margin-left: 45%;
-    margin-right: 45%;
+    margin-left: 51%;
+    margin-right: 39%;
     margin-top: 20px; 
 }
 
 #resetBtn:hover {
     background-color: rgb(88, 0, 0) !important; 
+}
+
+#hideBtn{
+    margin-top: 20px; 
+    margin-left: 90px;
+    width: 60px;
+    height: 30px;
 }

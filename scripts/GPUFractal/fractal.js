@@ -61,7 +61,7 @@ function load(){
     let paramsCookie = Cookies.getJSON('params');
 
     if (paramsCookie == undefined){
-        resWidth = resHeight = 720;
+        resWidth = resHeight = 420;
         maxIterations =  30;
         colorIn = {red: 0, blue: 0, green: 0};
         colorOut = {red: 0, blue: 0, green: 0};

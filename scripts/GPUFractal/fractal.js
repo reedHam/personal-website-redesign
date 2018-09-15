@@ -63,8 +63,8 @@ function load(){
     if (paramsCookie == undefined){
         resWidth = resHeight = 420;
         maxIterations =  30;
-        colorIn = {red: 58, blue: 183, green: 224};
-        colorOut = {red: 75, blue: 0, green: 122};
+        colorIn = {red: 0.58, blue: 0.183, green: 0.224};
+        colorOut = {red: 0.75, blue: 0.0, green: 0.122};
         Cookies.set('params', getInput(), { expires: 365 });
         paramsCookie = Cookies.getJSON('params');
     } else {

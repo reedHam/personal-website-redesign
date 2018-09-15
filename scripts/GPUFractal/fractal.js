@@ -53,7 +53,7 @@ var mousePos = {x:0, y:0};
 var size = 4;
 var colorIn; 
 var colorOut; 
-
+var hidden = false;
 
 
 // this function initializes all of the user controlled settings based on a cookie
@@ -63,8 +63,8 @@ function load(){
     if (paramsCookie == undefined){
         resWidth = resHeight = 420;
         maxIterations =  30;
-        colorIn = {red: 0, blue: 0, green: 0};
-        colorOut = {red: 0, blue: 0, green: 0};
+        colorIn = {red: 58, blue: 183, green: 224};
+        colorOut = {red: 75, blue: 0, green: 122};
         Cookies.set('params', getInput(), { expires: 365 });
         paramsCookie = Cookies.getJSON('params');
     } else {
@@ -84,6 +84,7 @@ function load(){
     document.getElementById("mouseTrack").checked = paramsCookie.trackMouse == 1 ? true : false;
     document.getElementById("power").value = paramsCookie.power;
     
+    // need to convert from fractional to percentage rgb values
     const inColourSelector = colorjoe.rgb("innerColorSelector", "rgb(" + Math.floor(paramsCookie.redIn * 100) + "%, " + Math.floor(paramsCookie.greenIn * 100) + "%, " + Math.floor(paramsCookie.blueIn * 100) +"%)");
     inColourSelector.on("change", color => {
         colorIn.red = color.red();
@@ -217,7 +218,7 @@ function resetToDefault(){
     document.getElementById("sizeText").value = 4;
     document.getElementById("zoomSlider").value = 0;
     
-    document.getElementById("mouseTrack").checked = false;
+    document.getElementById("mouseTrack").checked = true;
     document.getElementById("power").value = 2;
 
     reload();
@@ -250,3 +251,31 @@ function getInput(){
     };
 }
 
+function hide(){
+    let main = document.getElementsByTagName("main")[0];
+    let colorSelBg1 = document.getElementsByClassName("bg1");
+    let colorSelBg2 = document.getElementsByClassName("bg2");
+    let hideBtn = document.getElementById("hideBtn");
+
+    if (hidden == false){
+        // shrink the control box
+        main.style.height = "2%";
+        // hide the absolute position gradiants from colout selectors
+        colorSelBg1[0].style.visibility = "hidden";
+        colorSelBg1[1].style.visibility = "hidden";
+        colorSelBg2[0].style.visibility = "hidden";
+        colorSelBg2[1].style.visibility = "hidden";
+        hideBtn.innerHTML = "Show";
+        hideBtn.style.top = "30%";
+        hidden = true;
+    } else {
+        main.style.height = "auto";
+        colorSelBg1[0].style.visibility = "visible";
+        colorSelBg1[1].style.visibility = "visible";
+        colorSelBg2[0].style.visibility = "visible";
+        colorSelBg2[1].style.visibility = "visible";
+        hideBtn.innerHTML = "Hide";
+        hideBtn.style.top = "94%";
+        hidden = false;
+    }
+}

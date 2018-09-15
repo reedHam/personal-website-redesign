@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                     <td>Mouse tracking</td>
-                    <td><input id="mouseTrack" type="checkBox"></td>
+                    <td><input id="mouseTrack" type="checkBox" checked="true"></td>
                 </tr>
             </table>
              
@@ -70,11 +70,9 @@
                     <div class="clearfix"></div>
             </div>
 
-            <div class="buttonContainer">
-                <button id="resetBtn" onclick="resetToDefault()">Reset To Default</button>
-                <button id="hideBtn" onclick="hide()">Hide</button>
-            </div>
-            
+            <button id="resetBtn" onclick="resetToDefault()">Reset To Default</button>
+
+            <button id="hideBtn" onclick="hide()">Hide</button>
         </main>
 
         <div id="fractal" class="canvasDiv"></div>

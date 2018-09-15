@@ -1,5 +1,5 @@
 main{
-    background: rgb(102, 102, 102);
+    background: var(--bgColor, rgb(102, 102, 102));
     padding: 20px !important;
     margin-top: 79px; /* for sticky navigation bar */
     box-shadow: 3px 3px 10px 3px black;

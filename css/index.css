@@ -18,6 +18,8 @@ header {
 
 h1{
     text-align:center;
+    font-size: 3.5em;
+    line-height: 1em;
 }
 
 header div {
@@ -38,6 +40,7 @@ header div {
 } 
 
 header div h1 {
+    font-size: 3em;
     margin: 0px;
     line-height: 1em;
 }
@@ -72,8 +75,9 @@ header div h1 {
     height: 100%;
 }
 
-.about p{
-    font-size: 1.2em;
+.about p {
+    font-size: 1.6em;
+    line-height: 1.4em;
     display: table-cell;
     vertical-align: middle;
     padding-left: 10%;
@@ -143,6 +147,7 @@ header div h1 {
 .projects p {
     grid-column: 1 / 4;
     text-align: center;
+    font-size: 1.6em;
 }
 
 .project {
@@ -152,7 +157,7 @@ header div h1 {
 }
 
 .project span {
-    font-size: 4em;
+    font-size: 3em;
     position: absolute;
     background-color: rgb(35, 38, 53);
     display: block;
@@ -179,12 +184,6 @@ header div h1 {
     }
 
     
-}
-
-@media (max-width: 1610px){
-    .project span {
-        font-size: 3em;
-    }
 }
 
 @media (max-width: 1230px){
@@ -219,6 +218,10 @@ header div h1 {
     padding: 15px;
 }
 
+.schools h2 {
+    font-size: 1.8em;
+    line-height: 1.4em;
+}
 
 .schools img {
     display: block;
@@ -229,6 +232,8 @@ header div h1 {
 
 .schools ul{
     list-style-type: none;
+    font-size: 1.4em;
+    line-height: 1.4em;
     padding: 0;
 }
 

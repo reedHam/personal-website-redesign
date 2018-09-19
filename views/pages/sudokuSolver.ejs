@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/head %>
+        <script type="text/javascript" src="scripts/sudokuSolver/CSPBacktrack.js"></script>
+        <script type="text/javascript" src="scripts/sudokuSolver/sudoku.js"></script>
+        <script type="text/javascript" src="scripts/sudokuSolver/sudokuCSP.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/sudokuStyle.css">
+    </head>
+    <body onload="createTable()">
+        <nav class="sticky">
+            <% include ../partials/nav %>
+        </nav>
+
+        <main>
+            <div id="headers">
+                <h1>Sudoku solver</h1>
+                <p id="noSolTxt" style="visibility: hidden">Cannot Find Solution :(</p>
+            </div>
+            <div id="sudokuDiv"></div>
+            <div id="buttons">
+                <button onclick="solve()">Solve</button>
+                <button onclick="resetBoard()">Clear</button>
+            </div>
+            <div>
+                <hr>
+                <p class="description">
+                    This sudoku solver is implemented using a CSP <a href="https://en.wikipedia.org/wiki/Constraint_satisfaction_problem" target="_blank">(Constraint Satisfaction Problem)</a> algorithm.<br>
+                    See the source at my <a href="https://github.com/reedHam/Sudoku-AI" target="_blank">Git hub</a> repository. 
+                </p>
+            </div>
+        </main>
+    </body>
+</html>

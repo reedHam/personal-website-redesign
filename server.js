@@ -19,4 +19,8 @@ app.get('/GPUFractal', function (req, res) {
     res.render('pages/GPUFractal', {title: "GPU Fractal"});
 });
 
+app.get('/sudokuSolver', function (req, res) {
+    res.render('pages/sudokuSolver', {title:'Sudoku Solver'});
+});
+
 server.listen(8080, '127.0.0.1');

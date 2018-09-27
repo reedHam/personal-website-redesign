@@ -62,7 +62,6 @@
             </div>
            
 
-            <br>
             <div class="slideContainer">
                     <h2 id="zoomLbl">Zoom</h2>
                     <input id="sizeText"  type="number"  value="4" step="any">
@@ -70,8 +69,23 @@
                     <div class="clearfix"></div>
             </div>
 
-            <button id="resetBtn" onclick="resetToDefault()">Reset To Default</button>
+            <div class="about">
+                <h2>About</h2>
+                <hr>
+                <p>
+                    This fractal generator creates the <a href="https://en.wikipedia.org/wiki/Mandelbrot_set" target="_blank">Mandelbrot</a> (without mouse tracking) 
+                    and <a href="https://en.wikipedia.org/wiki/Julia_set" target="_blank">Julia</a> (with mouse tracking) set fractals.<br>
+                    The Mandelbrot set uses the formula f(z) = z^2 + c and by changing portions of the formula you can generate different fractals.<br>
+                    The tutorial I used to create this generator can be found <a href="http://warp.povusers.org/Mandelbrot/" target="_blank">here</a>.
+                </p>
+                <p>
+                    <a href="http://gpu.rocks/" target="_blank">GPU.js</a> is used to harness the gpu and display to the browser.<br>
+                    <a href="https://github.com/bebraw/colorjoe" target="_blank">Colorjoe</a> is used to create the color selectors.
+                </p>
+            </div>
 
+            <button id="resetBtn" onclick="resetToDefault()">Reset To Default</button>
+            
             <button id="hideBtn" onclick="hide()">Hide</button>
         </main>
 

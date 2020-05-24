@@ -106,15 +106,15 @@ button:active {
 
 /* links */
 a {
-    color: rgb(0, 14, 209);
+    color: rgb(103, 126, 180);
 }
 
 a:hover {
-    color: rgb(9, 34, 255);
+    color: rgb(108, 173, 223);
 }
 
 a:visited {
-    color: rgb(0, 7, 66);
+    color: rgb(103, 111, 180);
 }
 
 img {

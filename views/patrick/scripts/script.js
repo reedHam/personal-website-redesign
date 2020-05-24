@@ -98,7 +98,7 @@ function toggleContactForm() {
     
   } else {
     contactPopup.style.display = "none";
-    togglebtn.innerHTML = "Contact Us";
+    togglebtn.innerHTML = "Contact Us For A Quote";
     togglebtn.classList.replace("close-form-btn-hvr", "open-form-btn-hvr", );
   }
 }

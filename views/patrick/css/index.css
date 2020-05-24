@@ -5,7 +5,7 @@ html {
 body { padding-right: 0 !important }
 
 #container-header {
-    background-image: url('../images/cover.jpg');
+    background-image: url('../images/cover.webp');
     background-size: cover;
 }
 

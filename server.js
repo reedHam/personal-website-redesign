@@ -3,6 +3,8 @@ var app = express();
 var server = require('http').Server(app);
 app.set('view engine', 'ejs');
 
+
+app.use('/patrick', express.static(__dirname + '/views/patrick'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/images', express.static(__dirname + '/images'));
 app.use('/scripts', express.static(__dirname + '/scripts'));
@@ -21,6 +23,10 @@ app.get('/GPUFractal', function (req, res) {
 
 app.get('/sudokuSolver', function (req, res) {
     res.render('pages/sudokuSolver', {title:'Sudoku Solver'});
+});
+
+app.get('/panoramalandscaping', function (req, res) {
+    res.render('patrick/index');
 });
 
 server.listen(8080, '127.0.0.1');

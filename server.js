@@ -25,8 +25,8 @@ app.get('/sudokuSolver', function (req, res) {
     res.render('pages/sudokuSolver', {title:'Sudoku Solver'});
 });
 
-app.get('/panoramalandscaping', function (req, res) {
+app.get('/panoramiclandscaping', function (req, res) {
     res.render('patrick/index');
 });
 
-server.listen(8080, '127.0.0.1');
+server.listen(80, "138.68.234.6");

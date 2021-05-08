@@ -111,11 +111,11 @@ class AiEnableButton extends Button {
 // collection for the ai level arrow buttons and level counter 
 class AiSelector {
     constructor(x, y){
-        this.aiEnableBtn = new AiEnableButton(x , y);
-        this.label = game.add.text(x + 21, y + 48, "AI Level", gameProperties.defaultTextStyle)
-        this.counter = game.add.text(x + 65, y + 80, "1", gameProperties.defaultTextStyle);
-        this.decArrow = new DecArrow(x + 21, y + 80, this.counter);
-        this.incArrow = new IncArrow(x + 85, y + 80, this.counter);
+        this.aiEnableBtn = new AiEnableButton(x , y - 30);
+        this.label = game.add.text(x + 21, y - 50, "AI Level", gameProperties.defaultTextStyle)
+        this.counter = game.add.text(x + 65, y - 10, "1", gameProperties.defaultTextStyle);
+        this.decArrow = new DecArrow(x + 21, y + 50, this.counter);
+        this.incArrow = new IncArrow(x + 85, y + 50, this.counter);
     }
 
     setPos(x, y){
@@ -154,12 +154,12 @@ class MenuCollection {
 
         this.btnReset = new ResetBtn(x + 35, y);
 
-        this.player1Label = game.add.text(x , y + 40, "Red Player", {fill: 'red', stroke:"#111111", strokeThickness: 6});
+        this.player1Label = game.add.text(x + 2, y + 100, "Red Player", {fill: 'red', stroke:"#111111", strokeThickness: 6});
         this.ai1Selector = new AiSelector(x, y + 80);
         this.ai1Selector.setAiLevel(gameProperties.AIPlayer1Level);
         this.ai1Selector.setAiEnabled(gameProperties.AIEnable1);
 
-        this.player2Label = game.add.text(x - 14, y + 210, "Yellow Player", {fill: 'yellow', stroke:"#111111", strokeThickness: 6});
+        this.player2Label = game.add.text(x - 18, y + 267, "Yellow Player", {fill: 'yellow', stroke:"#111111", strokeThickness: 6});
         this.ai2Selector = new AiSelector(x, y + 250);
         this.ai2Selector.setAiLevel(gameProperties.AIPlayer2Level);
         this.ai2Selector.setAiEnabled(gameProperties.AIEnable2);
